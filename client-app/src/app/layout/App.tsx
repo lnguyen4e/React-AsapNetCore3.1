@@ -3,7 +3,6 @@ import { Container } from 'semantic-ui-react';
 import NavBar from '../../features/nav/NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { observer } from 'mobx-react-lite';
-//
 import {
   Route,
   withRouter,

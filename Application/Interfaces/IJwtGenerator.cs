@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.Interfaces
 {
-   public interface JWtGenerator
+   public interface IJwtGenerator
     {
         string CreateToken(AppUser user);
     }

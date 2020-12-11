@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Infrastructure.Security
 {
-    public class JwtGenerator : JWtGenerator
+    public class JwtGenerator : IJwtGenerator
     {
         private readonly SymmetricSecurityKey _key;
 
