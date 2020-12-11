@@ -18,7 +18,7 @@ namespace Infrastructure.Security
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super secret key"));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.Aes128CbcHmacSha256);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),

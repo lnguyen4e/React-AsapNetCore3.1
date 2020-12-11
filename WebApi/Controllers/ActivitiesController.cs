@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Application.Activities;
+using Application.Errors;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers;
 
@@ -17,10 +20,12 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Activity>>> List()
         {
+            
             return await Mediator.Send(new List.Query());
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Activity>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
