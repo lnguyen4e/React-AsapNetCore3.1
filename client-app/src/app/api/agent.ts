@@ -3,7 +3,8 @@ import { IActivity } from '../models/activity';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 import { IUser, IUserFormValues } from '../models/user';
-
+import {IProfile} from '../models/profile';
+import { request } from 'http';
 axios.defaults.baseURL = 'http://localhost:5000/api';
 axios.interceptors.request.use((config)=>{
     const token = window.localStorage.getItem('jwt');
@@ -55,7 +56,11 @@ const User ={
     login:(user:IUserFormValues): Promise<IUser>=> requests.post(`/user/login`,user),
     register:(user:IUserFormValues): Promise<IUser>=> requests.post(`/user/register`,user)
 }
+const Profiles={
+    get:(username:string):Promise<IProfile>=>requests.get(`/profiles/${username}`)
+}
 export default {
     Activities,
-    User
+    User,
+    Profiles
 }
