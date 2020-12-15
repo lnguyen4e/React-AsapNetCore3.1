@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Persistence;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -52,11 +53,11 @@ namespace Application.User
                 var result = await _signinManager.CheckPasswordSignInAsync(user, request.Password,false);
                 if(result.Succeeded)
                 {
-                    return new User { 
-                    DisplayName= user.DisplayName,
-                    Token=_jwtGenerator.CreateToken(user),
-                    Username = user.UserName,
-                    Image = null
+                    return new User {
+                        DisplayName = user.DisplayName,
+                        Token = _jwtGenerator.CreateToken(user),
+                        Username = user.UserName,
+                        Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                     };
                 }
                 throw new RestException(HttpStatusCode.Unauthorized);
