@@ -110,4 +110,38 @@ export default class ProfileStore {
             toast.error('Problem updating profile')
         }
     }
+    @action follow = async (username:string)=>{
+        this.loading = true;
+        try{
+            agent.Profiles.follow(username);
+            runInAction(()=>{
+                this.profile!.Following=true;
+                this.profile!.followersCount++;
+                this.loading=false;
+            })
+        }
+        catch(error){
+            toast.error("Problem following user");
+            runInAction(()=>{
+                this.loading=false;
+            })
+        }
+    }
+    @action unfollow = async (username:string)=>{
+        this.loading = true;
+        try{
+            agent.Profiles.unfollow(username);
+            runInAction(()=>{
+                this.profile!.Following=false;
+                this.profile!.followersCount--;
+                this.loading=false;
+            })
+        }
+        catch(error){
+            toast.error("Problem unfollowing user");
+            runInAction(()=>{
+                this.loading=false;
+            })
+        }
+    }
 }

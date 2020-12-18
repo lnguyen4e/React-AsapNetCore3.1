@@ -42,11 +42,11 @@ const requests = {
     post: (url: string, body: {}) => axios.post(url, body).then(sleep(1000)).then(responseBody),
     put: (url: string, body: {}) => axios.put(url, body).then(sleep(1000)).then(responseBody),
     del: (url: string) => axios.delete(url).then(sleep(1000)).then(responseBody),
-    postForm:(url:string,file:Blob)=>{
-        let formData= new FormData();
-        formData.append('File',file);
-        return axios.post(url,formData,{
-            headers:{'Content-type':'multipart/form-data'}
+    postForm: (url: string, file: Blob) => {
+        let formData = new FormData();
+        formData.append('File', file);
+        return axios.post(url, formData, {
+            headers: {'Content-type': 'multipart/form-data'}
         }).then(responseBody)
     }
 };
@@ -69,10 +69,13 @@ const User = {
 
 const Profiles = {
     get: (username: string): Promise<IProfile> => requests.get(`/profiles/${username}`),
-    uploadPhoto:(photo:Blob): Promise<IPhoto>=>requests.postForm(`/photos`,photo),
-    setMainPhoto: (id:string) => requests.post(`/photos/${id}/setMain`,{}),
-    deletePhoto:(id:string) =>requests.del(`/photos/${id}`),
-    updateProfile :(profile:Partial<IProfile>)=> requests.put('/profiles',profile)
+    uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
+    setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
+    deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+    updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile),
+    follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
+    unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
+  
 }
 
 export default {
