@@ -42,7 +42,7 @@ export default class ActivityStore {
   }
   @computed get axiosParams(){
     const params = new URLSearchParams();
-    params.append('limit',String(LIMIT);
+    params.append('limit',String(LIMIT));
     params.append('offset',`${this.page? this.page * LIMIT:0}`);
     this.predicate.forEach((value,key)=>{
       if(key === 'startDate'){
